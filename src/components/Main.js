@@ -13,6 +13,7 @@ function Main(props) {
     api
       .loadUserInfo()
       .then((res) => {
+        console.log(res, 'res');
         setUserName(res.name);
         setUserDescription(res.about);
         setUserAvatar(res.avatar);
@@ -26,10 +27,10 @@ function Main(props) {
     api
       .getInitialCards()
       .then((data) => {
-        console.log('useEffect', data);
-        // setCardSection((cards) => [...cards, ...data]);
-
+        console.log(data, 'data');
+        // setCards((cards) => [...cards, ...data]);
         setCards((cards) => [...cards, ...data]);
+
       })
 
       .catch((err) => {
