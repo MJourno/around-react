@@ -8,15 +8,16 @@ function Main(props) {
   const [userDescription, setUserDescription] = React.useState('');
   const [userAvatar, setUserAvatar] = React.useState('');
   const [cards, setCards] = React.useState([]);
+  const [userId, setUserId] = React.useState("");
 
   React.useEffect(() => {
     api
       .loadUserInfo()
       .then((res) => {
-        console.log(res, 'res');
         setUserName(res.name);
         setUserDescription(res.about);
         setUserAvatar(res.avatar);
+        setUserId(res._id);
       })
       .catch((err) => {
         console.log(err);
@@ -27,10 +28,7 @@ function Main(props) {
     api
       .getInitialCards()
       .then((data) => {
-        console.log(data, 'data');
-        // setCards((cards) => [...cards, ...data]);
-        setCards((cards) => [...cards, ...data]);
-
+        setCards(data);
       })
 
       .catch((err) => {
@@ -38,14 +36,17 @@ function Main(props) {
       });
   }, []);
 
-
   return (
     <main className="main">
       <section className="profile">
         <div
           className="avatar"
           style={{ backgroundImage: `url(${userAvatar})` }}>
-          <button aria-label="edit" type="button" className="button profile__edit-img-button" onClick={props.onEditAvatarClick} />
+          <button
+            aria-label="edit"
+            type="button"
+            className="button profile__edit-img-button"
+            onClick={props.onEditAvatarClick} />
         </div>
         <div className="profile__info">
           <h1 className="profile__value profile__value_type_name">
@@ -68,13 +69,19 @@ function Main(props) {
       </section>
       <section className="cards">
         <ul className="elements">
-          {cards.map((card, id) => (
-            <Card key={id}
-              card={card}
-              likes={card.likes}
-              link={card.link}
-              title={card.name}
-              onCardClick={props.onCardClick} />))}
+          {
+            cards.map((card) => (
+              <Card
+                card={card}
+                key={card._id}
+                userId={userId}
+                likes={card.likes}
+                link={card.link}
+                title={card.name}
+                onCardClick={props.onCardClick}
+              />
+            ))
+          }
         </ul>
       </section>
     </main>

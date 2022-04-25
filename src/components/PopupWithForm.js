@@ -4,9 +4,7 @@ function PopupWithForm(props) {
     <div className={`popup popup_type_${props.name}
      ${props.isOpen ? "popup_is-open" : ""
       }`}>
-      <div className={`popup__container popup__container-${props.name}
-       ${props.isOpen ? "popup_is-open" : ""
-        }`}>
+      <div className={`popup__container popup__container-${props.name}  `}>
         <button
           aria-label="Close"
           type="button"

@@ -10,8 +10,6 @@ class Api {
   }
 
   getInitialCards() {
-    console.log('getInitialCards');
-
     return customFetch(`${this._baseUrl}/cards`, {
       headers: this._headers
     })

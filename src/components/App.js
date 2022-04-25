@@ -6,7 +6,7 @@ import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
 import PopupWithImage from './PopupWithImage';
 
-function App(props) {
+function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
@@ -14,36 +14,25 @@ function App(props) {
 
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
-    // document.querySelector('.popup_type_edit')
-    //   .classList.add('popup_is-open');
-    console.log('open2');
   }
 
   function handleAddPlaceClick() {
     setIsAddPlacePopupOpen(true);
-    // document.querySelector('.popup_type_add-card')
-    //   .classList.add('popup_is-open');
-    console.log('open3');
   }
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
-    // document.querySelector('.popup_type_edit-profile-img')
-    //   .classList.add('popup_is-open');
-    console.log('open1');
   }
 
-  function handleCardClick() {
-    setSelectedCard(true);
+  function handleCardClick(card) {
+    setSelectedCard(card);
   }
 
   function closeAllPopups() {
-    console.log('close');
-
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
-    setSelectedCard(false);
+    setSelectedCard(null);
   }
 
   return (
@@ -118,7 +107,10 @@ function App(props) {
           id="input_type_link-error"
           className="popup__error" />
       </PopupWithForm>
-      <PopupWithImage onClose={closeAllPopups} />
+      <PopupWithImage
+        card={selectedCard}
+        onClose={closeAllPopups}
+      />
       <PopupWithForm
         name="delete"
         title="Are you sure?"
