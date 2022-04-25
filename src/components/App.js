@@ -4,7 +4,7 @@ import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
-import PopupWithImage from './PopupWithImage';
+import ImagePopup from './ImagePopup';
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
@@ -107,7 +107,7 @@ function App() {
           id="input_type_link-error"
           className="popup__error" />
       </PopupWithForm>
-      <PopupWithImage
+      <ImagePopup
         card={selectedCard}
         onClose={closeAllPopups}
       />
