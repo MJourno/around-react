@@ -2,8 +2,7 @@ function Card(props) {
 
   return (
     <li
-      className="element card"
-      key={props._id}>
+      className="element card">
       <button
         className="button element__delete" />
       <div
