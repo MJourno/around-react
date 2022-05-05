@@ -20,7 +20,7 @@ function PopupWithForm(props) {
             aria-label="save"
             type="submit"
             value="Save"
-            onClick={props.onClose}
+            onClick={props.onSubmit}
             className="button popup__save">
             {props.value}
           </button>

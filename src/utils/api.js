@@ -17,23 +17,27 @@ class Api {
 
   loadUserInfo() {
     return customFetch(`${this._baseUrl}/users/me`, {
-      headers: this._headers
+      headers: this._headers,
     })
   }
 
   createCard(data) {
+    console.log(data, 'data');
     return customFetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
       method: "POST",
-      body: JSON.stringify(data)
+      body: JSON.stringify({
+        name: data.name,
+        link: data.link,
+      })
     })
   }
 
-  editProfile(data) {
+  editProfile(name, about) {
     return customFetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
       method: "PATCH",
-      body: JSON.stringify(data)
+      body: JSON.stringify({name, about})
     })
   }
 
@@ -44,10 +48,10 @@ class Api {
     })
   }
 
-  likeCard(cardId) {
+  changeLikeCardStatus(cardId, isLiked) {
     return customFetch(`${this._baseUrl}/cards/likes/${cardId}`, {
       headers: this._headers,
-      method: "PUT",
+      method: isLiked ? "DELETE" : "PUT",
     })
   }
 
@@ -57,12 +61,11 @@ class Api {
       method: "DELETE",
     })
   }
-  updateProfileImg(link) {
+  setUserAvatar(link) {
     return customFetch(`${this._baseUrl}/users/me/avatar`, {
       headers: this._headers,
       method: "PATCH",
-      body: JSON.stringify(link)
-
+      body: JSON.stringify({ avatar: link})
     })
   }
 }
