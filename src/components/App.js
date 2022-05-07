@@ -70,31 +70,45 @@ function App() {
       .setUserAvatar(avatar)
       .then((updated) => {
         setCurrentUser(updated);
+        closeAllPopups();
       })
       .catch((err) => {
         console.log(err);
       });
-    closeAllPopups();
   }
 
   function handleUpdateUser({ name, about }) {
     api.editProfile(name, about)
       .then((data) => {
         setCurrentUser(data);
+        closeAllPopups();
       })
       .catch((err) => {
         console.log(err);
       });
-    closeAllPopups();
   }
 
   function handleAddPlace({ name, link }) {
     api.createCard({ name, link })
       .then((newCard) => {
-        setCards([...cards, newCard])
+        setCards([newCard, ...cards]);
+        closeAllPopups();
       })
-    closeAllPopups();
+      .catch((err) => {
+        console.log(err);
+      });
   }
+
+  React.useEffect(() => {
+    const closeByEscape = (e) => {
+      if (e.key === 'Escape') {
+        closeAllPopups();
+      }
+    }
+    document.addEventListener('keydown', closeByEscape)
+    return () => document.removeEventListener('keydown', closeByEscape)
+  }, [])
+
 
   React.useEffect(() => {
     api

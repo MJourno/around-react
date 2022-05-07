@@ -5,12 +5,11 @@ function AddPlacePopup(props) {
   const [name, setName] = React.useState('');
   const [link, setLink] = React.useState('');
 
-  // function handleChange(e) {
-  //   const targetName = e.target.name;
-  //   const targetValue = e.target.value;
-  //   targetName === 'name' && setName(targetValue);
-  //   targetName === 'link' && setLink(targetValue);
-  // }
+  React.useEffect(() => {
+    setName('');
+    setLink('');
+  }, [props.isOpen]);
+
   function handleNameChange(e) {
     setName(e.target.value);
   }
@@ -21,7 +20,7 @@ function AddPlacePopup(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    props.onAddPlace({name, link});
+    props.onAddPlace({ name, link });
   }
 
   return (

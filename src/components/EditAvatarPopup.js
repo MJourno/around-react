@@ -12,7 +12,6 @@ function EditAvatarPopup(props) {
   }
 
   return (
-    <>
       <PopupWithForm
         name="edit-profile-img"
         title="Change profile picture"
@@ -33,7 +32,6 @@ function EditAvatarPopup(props) {
           id="input_type_Img_link-error"
           className="popup__error" />
       </PopupWithForm>
-    </>
   )
 }
 export default EditAvatarPopup;
